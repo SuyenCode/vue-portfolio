@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@import './base.css';
+
+:root {
+  --pure-black: #010105;
+  --deep-navy: #02061a;
+  --dark-blue: #051245;
+  --royal-blue: #0c34ba;
+  --electric-blue: #053be6;
+  --bright-blue: #116af6;
+  --light-gray: #bdbcc0;
+  --dark-gray: #3b3a42;
+}
+
+body {
+  font-family: Manrope, sans-serif;
+  background: var(--pure-black);
+  color: var(--light-gray);
+}
