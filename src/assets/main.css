@@ -19,27 +19,24 @@ body {
 }
 
 .nav-link {
-  position: relative;
-  width: fit-content;
-  padding-bottom: 0.125rem;
+  display: inline-block;
+  padding-bottom: 0.2rem;
   text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+  background-image: linear-gradient(var(--electric-blue), var(--electric-blue));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  transition:
+    background-size 0.2s ease,
+    color 0.2s ease;
 }
 
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 1px;
-  width: 0;
-  background: var(--electric-blue);
-  transition: width 0.2s;
-}
-
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:focus-visible,
+.nav-link.is-hover {
   color: var(--bright-blue);
-}
-
-.nav-link:hover::after {
-  width: 100%;
+  background-size: 100% 1px;
 }
