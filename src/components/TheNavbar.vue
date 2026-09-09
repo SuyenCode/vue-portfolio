@@ -18,19 +18,28 @@ const widestLanguageName = languages.reduce((widest, language) =>
 	language.name.length > widest.length ? language.name : widest,
 '')
 
-// Hover underline: nav <a> tags + dropdown language <span>s (not the selected-language summary).
 const navLinkClass =
 	'relative w-fit pb-0.5 uppercase after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[var(--electric-blue)] after:transition-all after:duration-200 hover:text-[var(--bright-blue)] hover:after:w-full'
 
 function pickLanguage(language: Language, event: Event) {
-	selectedLanguage.value = language
-	const details = (event.currentTarget as HTMLElement).closest('details')
+	const trigger = event.currentTarget as HTMLElement
+	const details = trigger.closest('details')
+
+	trigger.blur()
+	details?.classList.add('nav-lang--closing')
 	details?.removeAttribute('open')
+	selectedLanguage.value = language
+
+	requestAnimationFrame(() => {
+		requestAnimationFrame(() => {
+			details?.classList.remove('nav-lang--closing')
+		})
+	})
 }
 </script>
 
 <template>
-	<nav class="flex flex-wrap items-center gap-4 px-4 py-3 font-semibold tracking-wider">
+	<nav class="flex flex-wrap items-center gap-4 px-4 py-3 font-semibold tracking-wider mb-2 lg:px-8">
 		<button
 			type="button"
 			class="relative h-6 w-6 lg:hidden"
@@ -119,17 +128,27 @@ details[open] .nav-chevron {
 	width: max-content;
 	border: 1px solid var(--electric-blue);
 	background: transparent;
+	transition: border-color 0.25s ease;
+}
+
+.nav-lang[open] {
+	top: 50%;
+	transform: translateY(-50%);
+	border-color: transparent;
 	transition:
 		top 0.25s ease,
 		transform 0.25s ease,
 		border-color 0.25s ease;
 }
 
-.nav-lang[open] {
-	top: 50%;
-	right: 0;
-	transform: translateY(-50%);
-	border-color: transparent;
+.nav-lang--closing {
+	top: 0;
+	transform: none;
+	transition: none;
+}
+
+.nav-lang--closing .nav-lang-menu {
+	display: none;
 }
 
 .nav-lang summary {
