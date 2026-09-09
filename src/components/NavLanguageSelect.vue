@@ -4,6 +4,9 @@ import type { Language } from '../data/languages'
 
 const CLOSE_MS = 250
 
+let isClosing = false
+let closeTimer = 0
+
 const selectedLanguage = defineModel<Language>({ required: true })
 
 const props = defineProps<{
@@ -21,31 +24,66 @@ const otherLanguages = computed(() =>
 	props.languages.filter((language) => language.code !== selectedLanguage.value.code),
 )
 
-function closePicker(details: HTMLDetailsElement) {
-	if (!details.open) return
+function clearCloseStyles(details: HTMLDetailsElement) {
+	details.classList.remove('nav-lang--closing')
+	details.style.top = ''
+	details.style.transition = ''
+	details.style.transform = ''
+	isClosing = false
+}
 
-	const startTop = details.getBoundingClientRect().top
+function closePicker(details: HTMLDetailsElement) {
+	if (!details.open || isClosing) return
+
+	isClosing = true
+	window.clearTimeout(closeTimer)
+
+	const visualTop = details.getBoundingClientRect().top
+	const computed = getComputedStyle(details)
+
+	details.style.transition = 'none'
+	details.style.top = computed.top
+	details.style.transform = computed.transform
 	details.classList.add('nav-lang--closing')
 	details.removeAttribute('open')
-	details.style.transition = 'none'
-	details.style.transform = `translateY(${startTop - details.getBoundingClientRect().top}px)`
+
+	details.style.top = '0'
+	details.style.transform = 'none'
+	const restTop = details.getBoundingClientRect().top
+	details.style.transform = `translateY(${visualTop - restTop}px)`
 	void details.offsetHeight
+
+	const finish = () => {
+		details.removeEventListener('transitionend', onTransformEnd)
+		window.clearTimeout(closeTimer)
+		if (!isClosing) return
+		clearCloseStyles(details)
+	}
+
+	const onTransformEnd = (event: TransitionEvent) => {
+		if (event.propertyName !== 'transform') return
+		finish()
+	}
 
 	requestAnimationFrame(() => {
 		details.style.transition = 'transform 0.25s ease, border-color 0.25s ease'
 		details.style.transform = 'translateY(0)'
+		details.addEventListener('transitionend', onTransformEnd)
 	})
 
-	window.setTimeout(() => {
-		details.classList.remove('nav-lang--closing')
-		details.style.transition = ''
-		details.style.transform = ''
-	}, CLOSE_MS)
+	closeTimer = window.setTimeout(finish, CLOSE_MS + 50)
 }
 
 function onSummaryClick(event: MouseEvent) {
 	const details = (event.currentTarget as HTMLElement).closest('details')
-	if (!details?.open) return
+	if (!details) return
+
+	if (isClosing) {
+		event.preventDefault()
+		return
+	}
+
+	if (!details.open) return
 
 	event.preventDefault()
 	closePicker(details)
@@ -112,6 +150,10 @@ details[open] .nav-chevron {
 	top: 50%;
 	transform: translateY(-50%);
 	border-color: transparent;
+}
+
+.nav-lang--closing {
+	pointer-events: none;
 }
 
 .nav-lang--closing .nav-lang-menu {

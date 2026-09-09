@@ -27,12 +27,14 @@ const menuOpen = ref(false)
 			<span class="nav-burger-line top-5" :class="{ '-translate-y-2 -rotate-45': menuOpen }"></span>
 		</button>
 
-		<div v-show="menuOpen" class="relative flex w-full items-start justify-between gap-8">
-			<div class="flex flex-col gap-3">
-				<a v-for="link in navLinks" :key="link.href" :href="link.href" class="nav-link">
-					{{ link.label }}
-				</a>
-			</div>
+		<div v-show="menuOpen" class="nav-panel relative flex w-full items-start justify-between gap-8">
+			<ul class="flex flex-col gap-3">
+				<li v-for="link in navLinks" :key="link.href">
+					<a :href="link.href" class="nav-link" @click="menuOpen = false">
+						{{ link.label }}
+					</a>
+				</li>
+			</ul>
 
 			<NavLanguageSelect v-model="selectedLanguage" :languages="languages" />
 		</div>
