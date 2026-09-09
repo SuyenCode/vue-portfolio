@@ -1,6 +1,16 @@
 @import "tailwindcss";
 @import './base.css';
 
+/* Mobile-first: geen prefix = telefoon. Prefix = vanaf die breedte. */
+@theme {
+  --breakpoint-sm: 40rem; /* 640px  phone landscape */
+  --breakpoint-md: 48rem; /* 768px  tablet (hamburger) */
+  --breakpoint-lg: 64rem; /* 1024px laptop */
+  --breakpoint-xl: 80rem; /* 1280px pc */
+  --breakpoint-2xl: 96rem; /* 1536px groot scherm */
+  --breakpoint-tv: 120rem; /* 1920px tv / 1080p+ */
+}
+
 :root {
   --pure-black: #010105;
   --deep-navy: #02061a;
