@@ -14,7 +14,7 @@ const { key: hoveredHref, enter, leave } = useHoverKey()
 </script>
 
 <template>
-	<ul class="relative z-10 flex flex-col gap-3">
+	<ul class="relative z-10 flex shrink-0 flex-col gap-3">
 		<li v-for="link in links" :key="link.href">
 			<a
 				:href="link.href"

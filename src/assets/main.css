@@ -10,6 +10,17 @@
   --bright-blue: #116af6;
   --light-gray: #bdbcc0;
   --dark-gray: #3b3a42;
+  --page-min-width: 22.5rem;
+}
+
+html {
+  overflow-x: auto;
+}
+
+html,
+body,
+#app {
+  min-width: var(--page-min-width);
 }
 
 body {
