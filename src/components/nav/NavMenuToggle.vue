@@ -5,7 +5,7 @@ const open = defineModel<boolean>({ required: true })
 <template>
 	<button
 		type="button"
-		class="nav-menu-toggle relative h-6 w-6"
+		class="nav-menu-toggle relative h-6 w-6 lg:hidden"
 		:aria-expanded="open"
 		aria-label="Menu"
 		@click="open = !open"
