@@ -1,11 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import SectionHero from '../components/SectionHero.vue'
+</script>
 
 <template>
-  <main>
-    
-  </main>
+	<main>
+		<SectionHero />
+	</main>
 </template>
-
-<style scoped>
-
-</style>

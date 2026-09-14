@@ -11,11 +11,14 @@ const menuOpen = ref(false)
 </script>
 
 <template>
-	<nav class="flex flex-wrap items-center gap-4 px-4 py-3 font-semibold tracking-wider lg:flex-nowrap">
+	<nav
+		class="flex flex-wrap items-center gap-4 px-4 py-3 font-semibold tracking-wider lg:flex-nowrap"
+		:class="{ 'bg-[var(--pure-black)]': menuOpen }"
+	>
 		<NavMenuToggle v-model="menuOpen" />
 
 		<div
-			class="nav-panel relative w-full flex-nowrap items-start justify-between gap-8 lg:flex-1"
+			class="nav-panel relative w-full flex-nowrap items-start justify-between gap-8"
 			:class="menuOpen ? 'flex' : 'hidden lg:flex'"
 		>
 			<NavLinks :links="navLinks" @navigate="menuOpen = false" />

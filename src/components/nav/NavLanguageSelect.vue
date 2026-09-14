@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import type { Language } from '../../data/languages'
-import { useDetailsSlideClose } from '../../composables/useDetailsSlideClose'
+import { useDetailsClose } from '../../composables/useDetailsClose'
 import { useHoverKey } from '../../composables/useHoverKey'
 
 const selectedLanguage = defineModel<Language>({ required: true })
@@ -11,7 +11,7 @@ const props = defineProps<{
 }>()
 
 const detailsRef = ref<HTMLDetailsElement | null>(null)
-const { close, onSummaryClick } = useDetailsSlideClose(detailsRef)
+const { close, onSummaryClick } = useDetailsClose(detailsRef)
 const { key: hoveredCode, enter, leave } = useHoverKey()
 
 const widestLanguageName = computed(() =>
@@ -83,31 +83,11 @@ details[open] .nav-chevron {
 	right: 0;
 	width: max-content;
 	border: 1px solid var(--electric-blue);
-	transition:
-		top 0.25s ease,
-		transform 0.25s ease,
-		border-color 0.25s ease;
+	transition: border-color 0.25s ease;
 }
 
 .nav-lang[open] {
-	top: 50%;
-	transform: translateY(-50%);
 	border-color: transparent;
-}
-
-@media (min-width: 1024px) {
-	.nav-lang[open] {
-		top: 0;
-		transform: none;
-	}
-}
-
-.nav-lang--closing {
-	pointer-events: none;
-}
-
-.nav-lang--closing .nav-lang-menu {
-	display: none;
 }
 
 .nav-lang summary {

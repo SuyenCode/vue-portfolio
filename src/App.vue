@@ -4,10 +4,10 @@ import TheNavbar from './components/TheNavbar.vue'
 </script>
 
 <template>
-  <header>
-    <TheNavbar />
-  </header>
+	<header class="absolute inset-x-0 top-0 z-50">
+		<TheNavbar />
+	</header>
 
-  <RouterView />
+	<RouterView />
 </template>
 

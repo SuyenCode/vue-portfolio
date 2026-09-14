@@ -5,7 +5,7 @@ const open = defineModel<boolean>({ required: true })
 <template>
 	<button
 		type="button"
-		class="nav-menu-toggle relative h-6 w-6 lg:hidden"
+		class="relative h-6 w-6 cursor-pointer lg:hidden"
 		:aria-expanded="open"
 		aria-label="Menu"
 		@click="open = !open"
@@ -17,10 +17,6 @@ const open = defineModel<boolean>({ required: true })
 </template>
 
 <style scoped>
-.nav-menu-toggle {
-	cursor: pointer;
-}
-
 .nav-burger-line {
 	position: absolute;
 	left: 0;

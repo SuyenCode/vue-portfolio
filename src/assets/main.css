@@ -24,9 +24,22 @@ body,
 }
 
 body {
+  min-height: 100vh;
   font-family: Manrope, sans-serif;
   background: var(--pure-black);
   color: var(--light-gray);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-bebas {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.04em;
+}
+
+.font-script {
+  font-family: 'Great Vibes', cursive;
 }
 
 .nav-link {
