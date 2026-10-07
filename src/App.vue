@@ -4,7 +4,7 @@ import TheNavbar from './components/TheNavbar.vue'
 </script>
 
 <template>
-	<header class="absolute inset-x-0 top-0 z-50">
+	<header class="absolute inset-x-0 top-0 z-50 min-w-[var(--page-min-width)]">
 		<TheNavbar />
 	</header>
 

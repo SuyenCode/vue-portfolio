@@ -10,16 +10,34 @@
   --bright-blue: #116af6;
   --light-gray: #bdbcc0;
   --dark-gray: #3b3a42;
-  --page-min-width: 22.5rem;
+  --page-min-width: 360px;
 }
 
 html {
   overflow-x: auto;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
 html,
 body,
 #app {
+  min-width: var(--page-min-width);
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+}
+
+main {
   min-width: var(--page-min-width);
 }
 
@@ -63,4 +81,24 @@ body {
 .nav-link.is-hover {
   color: var(--bright-blue);
   background-size: 100% 1px;
+}
+
+.page-section {
+  min-width: var(--page-min-width);
+  height: 100svh;
+  min-height: 100svh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  background: var(--pure-black);
+}
+
+.page-section:nth-of-type(even) {
+  background: var(--deep-navy);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scroll-snap-type: y proximity;
+  }
 }

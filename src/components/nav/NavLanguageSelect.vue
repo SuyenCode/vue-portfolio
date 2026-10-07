@@ -35,7 +35,7 @@ function pickLanguage(language: Language, event: Event) {
 
 <template>
 	<div
-		class="pointer-events-none invisible inline-flex shrink-0 items-center gap-2 px-3 uppercase lg:ml-auto"
+		class="invisible inline-flex shrink-0 items-center gap-2 px-3 uppercase lg:ml-auto"
 		aria-hidden="true"
 	>
 		<span>{{ widestLanguageName }}</span>
